@@ -1,0 +1,7 @@
+﻿  exams_resolution.cpp
+C:\Users\Beatriz Aguiar\Desktop\uni\MNUM\exams_resolution\exams_resolution.cpp(87,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Beatriz Aguiar\Desktop\uni\MNUM\exams_resolution\exams_resolution.cpp(98,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Beatriz Aguiar\Desktop\uni\MNUM\exams_resolution\exams_resolution.cpp(413,13): warning C4129: 'R': unrecognized character escape sequence
+C:\Users\Beatriz Aguiar\Desktop\uni\MNUM\exams_resolution\exams_resolution.cpp(525,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Beatriz Aguiar\Desktop\uni\MNUM\exams_resolution\exams_resolution.cpp(536,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  exams_resolution.vcxproj -> C:\Users\Beatriz Aguiar\Desktop\uni\MNUM\exams_resolution\Debug\exams_resolution.exe
