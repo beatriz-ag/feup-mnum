@@ -291,7 +291,6 @@ void Exame_2018_5(double x1, double x2)
     } while (abs(x3 - x4) > 0.00001);
     cout << "x: " << x3 << endl;
 }
-//void Exame_2018_6()
 void Exame_2018() {
     Exame_2018_1(0.5, 0.25);
     Exame_2018_2();
@@ -302,15 +301,18 @@ void Exame_2018() {
 }
 
 
+
+
+/*Exame 2017*/
+
 /*Exc 1*/
 double q1(double x) {
     return pow(x, 2) + pow(x, 4);
 }
 /*Exc 2*/
-double y(double x) {
-    return sqrt(1 + pow(2.5 * exp(2.5 * x), 2);
+double y2(double x) {
+    return sqrt(1 + pow(2.5 * exp(2.5 * x), 2));
 }
-/*Exame 2017*/
 
 void Exame_2017_1(double x1,double x2) {
     cout << "1.\n Como se trata de uma função unidimensional, para encontrar a minimizar temos disponíveis os métodos dos terços, da secção aurea, da trissecçao e da interpolação quadrática.\n";
@@ -336,26 +338,26 @@ void Exame_2017_1(double x1,double x2) {
 
 }
 double Exame_2017_2_simp(double a, double b, double h) {
-    double sum = y(a) + y(b);
+    double sum = y2(a) + y2(b);
     
     do {
         a += h;
-        sum += 2 * y(a);
+        sum += 2 * y2(a);
     } while (abs(b - a) > 0.000001);
     return sum * h / 2;
 }
-void Exame_2017_2_trap(double a, double b, double h)
+double Exame_2017_2_trap(double a, double b, double h)
 {
     double n = (b - a) / h;
-    double sum = y(a) + y(b);
+    double sum = y2(a) + y2(b);
     for (int i = 1; i < n; i++) {
         a += h;
         if (i % 2)
         {
-            sum += 4 * y(a);
+            sum += 4 * y2(a);
         }
         else
-            sum += 2 * y(a);
+            sum += 2 * y2(a);
     }
     return sum * h / 3;
 }
@@ -368,22 +370,18 @@ void Exame_2017() {
     double L2t = Exame_2017_2_trap(0, 1, 0.125/2);
     double L2s = Exame_2017_2_simp(0, 1, 0.125/2);
 
+
 }
 
 
 
 
-
-
-
-
-
+/*Teste 2017*/
 
 /*Exc 6*/
 double dzdt(double t, double y, double z) { return 1.5 + pow(t, 2) + t * z; }
 double dydt(double t, double y, double z) { return z; }
 
-/*Teste 2017*/
 void Teste_2017_1() {
     cout << "\n1.Maxima input:\n"
         << "A:matrix([18,-1,1],[3,-5,4],[6,7,29]);"
@@ -474,6 +472,7 @@ void Teste_2017() {
 
 
 }
+
 
 
 
@@ -604,13 +603,280 @@ void Exame_2016() {
 
 }
 
+
+
+/*Exame 2015*/
+
+/*Exc 1*/
+double dTdt(double T, double t) {
+    return -0.25 * (T - 37);
+}
+/*Exc 4*/
+double recx(double x) {
+    return 2 * log(2 * x);
+}
+/*Exc 5*/
+double y3(double x) {
+    return sqrt(1 + pow((2.5 * exp(2.5 * x)), 2));
+}
+/*Exc 7*/
+double f7(double x) {
+    return pow(x, 3) - 10 * sin(x) + 2.8;
+}
+
+void Exame_2015_7(double x0, double xf) {
+    cout << "\n7.\n";
+    double m;
+    for (int i = 0; i < 2; i++)
+    {
+        m = (x0 + xf) / 2;
+        if(f7(x0) * f7(m) < 0)
+            xf = m; 
+        else
+            x0 = m;
+
+        cout << "x0: " << x0 << " xf: " << xf << endl;
+    }
+}
+void Exame_2015_6()
+{
+    cout << "\n6.\nOdeio teoria pt2.\n";
+}
+void Exame_2015_5_simp(double x0, double xf, double h) {
+    double x = x0;
+    cout << "\n5.Simpson:\n";
+    cout << "\nh: " << h << " h': " << h / 2 << " h'': " << h / 4 ;
+    double n = (xf - x0) / h;
+    double sum1 = y3(x0) + y3(xf);
+    for (int i = 1; i < n; i++) {
+        x0 += h;
+        if (i % 2)
+            sum1 += 4 * y3(x0);
+        else
+            sum1 += 2 * y3(x0);
+    }
+    sum1 *= (h / 3);
+    cout << "\nL1: " << sum1 ;
+    h /= 2;
+    x0 = x;
+    n = (xf - x0) / h;
+    double sum2 = y3(x0) + y3(xf);
+    for (int i = 1; i < n; i++) {
+        x0 += h;
+        if (i % 2)
+            sum2 += 4 * y3(x0);
+        else
+            sum2 += 2 * y3(x0);
+    }
+    sum2 *= (h / 3);
+    cout << "\nL2: " << sum2 ;
+    x0 = x;
+
+    h /= 2;
+    n = (xf - x0) / h;
+    double sum3 = y3(x0) + y3(xf);
+    for (int i = 1; i < n; i++) {
+        x0 += h;
+        if (i % 2)
+            sum3 += 4 * y3(x0);
+        else
+            sum3 += 2 * y3(x0);
+    }
+    sum3 *= (h / 3);
+    cout << "\nL3: " << sum3 ;
+    cout << "\nQC: " << (sum2 - sum1) / (sum3 - sum2);
+    cout << "\nerro: " << abs((sum3 - sum2) / 15);
+}
+void Exame_2015_5_trap(double x0, double xf, double h) {
+    double x = x0;
+    cout << "\n5.Trapezio:\n";
+    cout << "\n h: " << h << "h': " << h / 2 << "h'': "<<h / 4 ;
+    double n = (xf - x0) / h;
+    double sum1 = y3(x0) + y3(xf);
+    for (int i = 1; i < n; i++) {
+        x0 += h;
+        sum1 += 2 * y3(x0);
+    }
+    sum1 *= (h / 2);
+    cout << "\nL1: " << sum1 ;
+    h /= 2;
+    x0 = x;
+
+     n = (xf - x0) / h;
+    double sum2 = y3(x0) + y3(xf);
+    for (int i = 1; i < n; i++) {
+        x0 += h;
+        sum2 += 2 * y3(x0);
+    }
+    sum2 *= (h / 2);
+    cout << "\nL2: " << sum2 ;
+    h /= 2;
+    x0 = x;
+
+     n = (xf - x0) / h;
+    double sum3 = y3(x0) + y3(xf);
+    for (int i = 1; i < n; i++) {
+        x0 += h;
+        sum3 += 2 * y3(x0);
+    }
+    sum3 *= (h / 2);
+    cout << "\nL3: " << sum3 ;
+    cout << "\nQC: " << (sum2 - sum1) / (sum3 - sum2);
+    cout << "\nerro: " << abs((sum3 - sum2) / 3);
+}
+void Exame_2015_4_2(double xn) {
+    cout << "\n4.2.\n";
+    cout << "x: " << xn << endl;
+    for (int i = 0; i < 1; i++) {
+        xn = recx(xn);
+        cout << "x: " << xn << endl;
+    }
+
+    cout << "\n4.3.\nresiduo:" << abs(xn-1.1) << endl;
+}
+void Exame_2015_4_1() {
+    cout << "\n4.1.\n Calculate dfdx to each recorrence formula and verify if |dfdx(x)|<1;\n";
+}
+void Exame_2015_3() {
+    cout << "\n3.a.\n Maxima:\nA:matrix([1,1/2,1/3,-1],[1/2,1/3,1/4,1],[1/3,1/4,1/5,1]);\nA:echelon(A);\n";
+    cout << "\n3.b.\n Maxima:\nA:rowop(A,1,2,1/2);\nA:rowop(A,1,3,-1/6);\nA:rowop(A,2,3,1);\n";
+    cout << "\n3.c.\n explained pag.101 book\n";
+}
+void Exame_2015_2()
+{
+    cout << "\n2.\nTeoria não é para mim\n";
+}
+void Exame_2015_1(double T, double t) {
+    cout << "Exame 2015\n\n1.\n";
+    double h = 0.4;
+    for (int i = 0; i < 3; i++) {
+        cout << " T: " << T<<endl;
+        T += h * dTdt(T, t);
+        t += h;
+    }
+}
+void Exame_2015() {
+    Exame_2015_1(3,5);
+    Exame_2015_2();
+    Exame_2015_3();
+    Exame_2015_4_1();
+    Exame_2015_4_2(1.1);
+    Exame_2015_5_simp(0, 1, 0.125);
+    Exame_2015_5_trap(0, 1, 0.125);
+    Exame_2015_6();
+    Exame_2015_7(1.5, 4.2);
+}
+
+
+
+
+/*Exame 2014*/
+
+/*Exc 1*/
+double dxdt(double t, double x, double z) {
+    return z;
+}
+double dzdt(double t, double x, double z,double k) {
+    return (z - k * x) / 20;
+}
+/*Exc 2*/
+double g(double x) {
+    return -x + 40 * cos(sqrt(x)) + 3;
+}
+double dgdx(double x) {
+    return -(20 * sin(sqrt(x))) / sqrt(x) - 1;
+}
+/*Exc 5*/
+double f5(double x) {
+    return 5 * cos(x) - sin(x);
+}
+
+void Exame_2014_5(double x1, double x2) {
+    cout << "\n5.\n";
+   double B = (sqrt(5) - 1) / 2;
+   double A = pow(B, 2);
+   double x3, x4;
+   x3 = x1 + A * (x2 - x1);
+   x4 = x1 + B * (x2 - x1);
+   cout << "x1: " << x1 << " x2: " << x2 << " x3: " << x3 << " x4: " << x4 << " f(x1): " << f5(x1) << " f(x2): " << f5(x2) << " f(x3): " << f5(x3) << " f(x4):  " << f5(x4) << endl;
+   for (int i = 0; i < 3; i++) {
+       x3 = x1 + A * (x2 - x1);
+       x4 = x1 + B * (x2 - x1);
+
+       if (f5(x3) < f5(x4)) {
+           x2 = x4;
+           x4 = x3;
+       }
+       else
+       {
+           x1 = x3;
+           x3 = x4;
+       }
+       cout << "x1: " << x1 << " x2: " << x2 << " x3: " << x3 << " x4: " << x4 << " f(x1): " << f5(x1) << " f(x2): " << f5(x2) << " f(x3): " << f5(x3) << " f(x4):  " << f5(x4) << endl;
+
+   }
+
+}
+void Exame_2014_3() {
+    cout << "\n3.\n Maxima: echelon(AB);rowops...";
+}
+void Exame_2014_2(double x) {
+    cout << "\n2.a. Maxima draw && verify the existence of 3 roots.\n";
+
+    cout << "\n2.b.\nx: " << x << " g(x): " << g(x) << endl;
+
+    for (int i = 0; i < 2; i++) {
+        x -= g(x) / dgdx(x);
+        cout << "x: " << x<<" g(x): "<<g(x)<<endl;
+    }
+}
+void Exame_2014_1(double x, double t, double z, double h) {
+    cout << "\n1.\n";
+    double xn5 = x, zn5 = z;
+    double xn20 = x, zn20 = z;
+    double xn40 = x, zn40 = z;
+    double x5=x, z5=z, x20=x, z20=z, x40=x, z40=z;
+        cout << "k = 5                           k = 20                          k=40\n";
+    for(int i = 0; i < 17; i++){
+        cout << "x5: " << xn5 <<" t5: " << t <<  "\tx20: " << xn20 << " t20: " << t << "\tx40: " << xn40 << " t40: " << t << endl;
+        x5= xn5; z5 = zn5;
+        x20 = xn20; z20 = zn20;
+        x40 = xn40; z40 = zn40;
+
+        xn5 += h * dxdt(t, x5, z5);
+        zn5 += h * dzdt(t, x5, z5, 5);
+
+        xn20 += h * dxdt(t, x20, z20);
+        zn20 += h * dzdt(t, x20, z20, 20);
+
+        xn40 += h * dxdt(t, x40, z40);
+        zn40 += h * dzdt(t, x40, z40, 40);
+        t += h;
+    }
+
+    cout << "\nEm k= 40, é a unica situaçáo em que se verifica x(1.6) = 0;\n";
+}
+void Exame_2014() {
+    cout << "\n\nExame 2014\n";
+    Exame_2014_1(1,0,0,0.1);
+    Exame_2014_2(1.7);
+    Exame_2014_5(2, 4);
+
+
+
+}
+
+
+
 int main()
 {
     cout << fixed;
     cout.precision(6);
     //Exame_2019();
     //Exame_2018();
-    Exame_2017();
+    //Exame_2017();
     //Teste_2017();
     //Exame_2016();
+    //Exame_2015();
+    Exame_2014();
 }
